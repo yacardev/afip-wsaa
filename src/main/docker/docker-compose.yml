@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  app:
+    image: 'afip-wsaa-0.0.1:latest'
+    build: ./
+    ports:
+      - 8080:8080
+    container_name: app
+    depends_on:
+      - db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+#      - SPRING_DATASOURCE_USERNAME=compose-postgres
+#      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  db:
+    image: 'postgres:14.2-alpine'
+    ports:
+      - 5432:5432
+    container_name: db
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+#version: "3.7"
+#
+#services:
+#  api_service:
+#    build: ./
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - postgres_db
+#  postgres_db:
+#    image: "postgres:14.2-alpine"
+#    restart: always
+#    ports:
+#      - 5433:5432
+#    environment:
+#      POSTGRES_DB: compose-postgres
+#      POSTGRES_PASSWORD: compose-postgres
